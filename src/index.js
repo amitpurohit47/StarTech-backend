@@ -6,10 +6,10 @@ import connectDB from "./db/mongoose.js";
 dotenv.config();
 
 //import Routes 
-import {GeneralRouter} from './routes';
+import {SchoolRouter} from './routes';
 
 //connect to DB
-//connectDB();
+connectDB();
 
 //middleware
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 //Route middleware 
-app.use("/api", GeneralRouter);
+app.use("/school/", SchoolRouter);
 
 //app.use('/api/posts',postRoute);
 

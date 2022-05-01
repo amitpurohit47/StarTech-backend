@@ -1,2 +1,2 @@
 //exports 
-export * from './general.route.js';
+export * from './school.route.js';
