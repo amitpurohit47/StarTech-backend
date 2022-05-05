@@ -26,22 +26,16 @@ const ClassSchema = new mongoose.Schema(
                 }
             },
         },
-        password: {
-            type: String,
-            required: true,
-            trim: true,
-            validate(value) {
-                if (value.length < 6) {
-                    throw new Error("Enter a strong password");
-                }
-            },
-        },
         teachers: [
             {
                 classId: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Class",
                 },
+                isClassTeacher: {
+                    type: Boolean,
+                    default: false,
+                }
             },
         ],
         students: [

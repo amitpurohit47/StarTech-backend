@@ -32,6 +32,19 @@ const StudentSchema = new mongoose.Schema(
         }
       },
     },
+    achievements: [
+      {
+        title: {
+          type: String,
+        },
+        description: {
+          type: String,
+        },
+        dateOfAchievement: {
+          type: Date,
+        },
+      },
+    ],
     tokens: [
       {
         token: {

@@ -32,6 +32,25 @@ const TeacherSchema = new mongoose.Schema(
         }
       },
     },
+    classTeacherOf: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Class",
+    },
+    Classes: [
+      {
+        classId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Class",
+        },
+        attendenceId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Attendence",
+        },
+        subject: {
+          type: String,
+        },
+      },
+    ],
     tokens: [
       {
         token: {
