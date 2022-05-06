@@ -17,19 +17,21 @@ const MarkSchema = new mongoose.Schema(
     },
     marksArray: [
       {
+        studentId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Student",
+        },
         subject: {
-          type: String
+          type: String,
         },
         outOf: {
-          type: Number
+          type: Number,
         },
         studentMarks: {
-          type: Number
-        }
-      }
-    ]
-
-
+          type: Number,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
