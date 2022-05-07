@@ -22,4 +22,4 @@ const studentAuth = async (req, res, next) => {
   }
 };
 
-export default studentAuth;
+export  {studentAuth};

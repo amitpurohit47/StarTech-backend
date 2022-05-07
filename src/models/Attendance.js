@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
-const AttendenceSchema = new mongoose.Schema(
+const AttendanceSchema = new mongoose.Schema(
     {
         classId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -36,4 +36,4 @@ const AttendenceSchema = new mongoose.Schema(
     }
 );
 
-export const Attendence = mongoose.model("Attendence", AttendenceSchema);
+export const Attendance = mongoose.model("Attendance", AttendanceSchema);

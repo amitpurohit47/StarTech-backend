@@ -22,4 +22,4 @@ const teacherAuth = async (req, res, next) => {
   }
 };
 
-export default teacherAuth;
+export  {teacherAuth};

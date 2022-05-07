@@ -9,6 +9,10 @@ dotenv.config();
 import {SchoolRouter} from './routes';
 import {StudentRouter} from './routes';
 import {TeacherRouter} from './routes';
+import {DiaryRouter} from './routes';
+import {AttendanceRouter} from './routes';
+
+
 
 //connect to DB
 connectDB();
@@ -33,6 +37,8 @@ app.use((req, res, next) => {
 app.use("/school/", SchoolRouter);
 app.use("/student/", StudentRouter);
 app.use("/teacher/", TeacherRouter);
+app.use("/diary/", DiaryRouter);
+app.use("/attendance/", AttendanceRouter);
 
 //app.use('/api/posts',postRoute);
 
