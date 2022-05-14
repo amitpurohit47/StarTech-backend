@@ -11,6 +11,8 @@ import {StudentRouter} from './routes';
 import {TeacherRouter} from './routes';
 import {DiaryRouter} from './routes';
 import {AttendanceRouter} from './routes';
+import {NoticeRouter} from './routes';
+import {NotificationRouter} from './routes';
 
 
 
@@ -39,6 +41,8 @@ app.use("/student/", StudentRouter);
 app.use("/teacher/", TeacherRouter);
 app.use("/diary/", DiaryRouter);
 app.use("/attendance/", AttendanceRouter);
+app.use("/notice/", NoticeRouter);
+app.use("/notification/", NotificationRouter);
 
 //app.use('/api/posts',postRoute);
 
