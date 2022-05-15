@@ -1,6 +1,5 @@
 import { Notice } from "../models/index.js";
 
-
 const addNotice=async (req, res) => {
     const notice = new Notice(req.body);
     try{
@@ -23,7 +22,5 @@ const allNotices = async (req, res) => {
     }
  
 }
-
-
 
 export {allNotices,addNotice};

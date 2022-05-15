@@ -1,9 +1,4 @@
-import jwt from "jsonwebtoken";
 import { Diary } from "../models/index.js";
-
-
-
-
 
 const adddiary = async (req, res) => {
     const {studentId,diaryArray}=req.body;

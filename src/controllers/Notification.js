@@ -1,9 +1,5 @@
-
-
-
 import { Notification } from "../models/index.js";
-
-
+ 
 const addNotification=async (req, res) => {
     const notification = new Notification(req.body);
     try{

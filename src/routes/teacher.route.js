@@ -5,7 +5,7 @@ import { Teacher } from "../models";
 
 const TeacherRouter = express.Router();
 
-TeacherRouter.post("/signup", createTeacher);
+//TeacherRouter.post("/signup", createTeacher);
 
 TeacherRouter.get("/login", teacherAuth, loginTeacher);
 

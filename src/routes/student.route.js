@@ -5,7 +5,7 @@ import { Student } from "../models";
 
 const StudentRouter = express.Router();
 
-StudentRouter.post("/signup", createStudent);
+//StudentRouter.post("/signup", createStudent);
 
 StudentRouter.get("/login", studentAuth, loginStudent);
 
