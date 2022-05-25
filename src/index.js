@@ -8,11 +8,7 @@ dotenv.config();
 //import Routes 
 import {SchoolRouter} from './routes';
 import {StudentRouter} from './routes';
-import {TeacherRouter} from './routes';
-import {DiaryRouter} from './routes';
-import {AttendanceRouter} from './routes';
-import {NoticeRouter} from './routes';
-import {NotificationRouter} from './routes';
+import {TeacherRouter} from './routes'; 
 
 
 
@@ -38,11 +34,7 @@ app.use((req, res, next) => {
 //Route middleware 
 app.use("/school/", SchoolRouter);
 app.use("/student/", StudentRouter);
-app.use("/teacher/", TeacherRouter);
-app.use("/diary/", DiaryRouter);
-app.use("/attendance/", AttendanceRouter);
-app.use("/notice/", NoticeRouter);
-app.use("/notification/", NotificationRouter);
+app.use("/teacher/", TeacherRouter); 
 
 //app.use('/api/posts',postRoute);
 
