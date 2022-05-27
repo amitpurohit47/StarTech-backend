@@ -12,7 +12,13 @@ const addClass = async (req, res) => {
 
 const fetchClass = async (req, res) => {
   try {
-    const _class = await Class.find({});
+    const _class = await Class.findOne({
+      _id: req.body.id,
+    })
+      .populate("teachers")
+      .populate("students")
+      .populate("studyMaterialId")
+      .populate("markArr");
     res.status(200).send(_class);
   } catch (e) {
     res.status(500).send({ error: "Internal Server Error" });

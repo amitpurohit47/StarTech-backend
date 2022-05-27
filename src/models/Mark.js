@@ -9,17 +9,18 @@ const MarkSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-    },
-    classId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Class",
-      required: true,
-    },
+    },  
     marksArray: [
       {
         studentId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Student",
+        },
+        rollNo: {
+          type: Number,
+        },
+        studentName: {
+          type: String,
         },
         subject: {
           type: String,

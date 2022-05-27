@@ -1,37 +1,50 @@
 import mongoose from "mongoose";
-import validator from "validator";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 const FeedbackSchema = new mongoose.Schema(
-  {
-    // Doubt in "studentId || teacherId || schoolId"
-    studentid: {
-      type: mongoose.Schema.Types.ObjectId,
+  { 
+    from: {
+      from: {
+        type: String,
+        required: true,
+      },
+      student: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Student",
+      },
+      teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Teacher",
+      },
+      school: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "School",
+      },
     },
-    teacherid:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Teacher",
-    },
-    schoolid:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "School",
-    },
-    issue:{
+    to: {
+      to: {
         type: String,
-        trim: true,
         required: true,
+      },
+      us: {
+        type: Boolean,
+      }, 
+      teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Teacher",
+      },
+      school: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "School",
+      },
+    }, 
+    issue: {
+      type: String,
+      trim: true,
+      required: true,
     },
-    for:{
-        // Doubt in "school || cc || subject teacher || admin"
-        type: String,
-        trim: true,
-        required: true,
-    },
-   
-    
-    
+    reply: {
+      type: String,
+    }
   },
   {
     timestamps: true,

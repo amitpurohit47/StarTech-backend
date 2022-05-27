@@ -32,6 +32,14 @@ const StudentSchema = new mongoose.Schema(
         }
       },
     },
+    schoolId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "School",
+    },
+    class: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Class",
+    },
     achievements: [
       {
         title: {

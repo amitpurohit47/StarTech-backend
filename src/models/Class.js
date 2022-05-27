@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import validator from "validator";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 const ClassSchema = new mongoose.Schema(
   {
@@ -28,9 +26,9 @@ const ClassSchema = new mongoose.Schema(
     },
     teachers: [
       {
-        classId: {
+        teacherId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Class",
+          ref: "Teacher",
         },
         isClassTeacher: {
           type: Boolean,
@@ -59,6 +57,16 @@ const ClassSchema = new mongoose.Schema(
         }
       },
     },
+    studyMaterialId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "StudyMaterial",
+    },
+    markArr: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Mark",
+      },
+    ],
   },
   {
     timestamps: true,

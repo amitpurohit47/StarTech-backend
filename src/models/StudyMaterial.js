@@ -5,15 +5,17 @@ import jwt from "jsonwebtoken";
 
 const StudyMaterialSchema = new mongoose.Schema(
   {
-    classId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Class",
+    subjectTitle: {
+      type: String,
       required: true,
     },
-
-    subjectArray: [
+    docArray: [
       {
         title: {
+          type: String,
+          required: true,
+        },
+        description: {
           type: String,
         },
         link: {
