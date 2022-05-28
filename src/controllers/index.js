@@ -7,3 +7,5 @@ export * from './Attendance.js';
 export * from './Notice.js';
 export * from './Notification.js';
 export * from './Feedback.js';
+export * from './StudyMaterial.js';
+export * from './Mark.js';
