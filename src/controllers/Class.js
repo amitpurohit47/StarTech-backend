@@ -10,7 +10,22 @@ const addClass = async (req, res) => {
   }
 };
 
+const fetchallClasses = async (req, res) => {
+  console.log("HelloAll");
+  try {
+    const _class = await Class.find({})
+      .populate("teachers")
+      .populate("students")
+      .populate("studyMaterialId")
+      .populate("markArr");
+    res.status(200).send(_class);
+  } catch (e) {
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+};
+
 const fetchClass = async (req, res) => {
+  console.log("Hello");
   try {
     const _class = await Class.findOne({
       _id: req.body.id,
@@ -25,4 +40,4 @@ const fetchClass = async (req, res) => {
   }
 };
 
-export { addClass, fetchClass };
+export { addClass, fetchClass, fetchallClasses };
