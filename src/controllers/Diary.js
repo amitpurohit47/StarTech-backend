@@ -1,30 +1,32 @@
 import { Diary } from "../models/index.js";
 
-const adddiary = async (req, res) => {
-    const {studentId,diaryArray}=req.body;
-    const temp={studentId,diaryArray};
-    const diary=new Diary(req.body);
-    try{
-        await diary.save();
-        res.status(201).send(diary);
-    }
-    catch(e)
-    {
-        res.status(500).send({ error: "Internal Server Error" });
-    }
-}
-const alldiaries = async (req, res) => {
-    const studentId = req.params.studentId;
-    console.log(studentId);
-    try{
-        const diaries=await Diary.find({studentId});
-        res.status(200).send(diaries)
-    }
-    catch(e)
-    {
-        res.status(500).send({ error: "Internal Server Error" });
-    }
- 
-}
+const addDiary = async (req, res) => {
+    //diary already created at time of student sign up.
+  try {
+    const diary = Diary.findOne({
+      _id: req.body.id,
+    });
+    diary.diaryArray.push({
+      message: req.body.message,
+      author: {
+        student: req.student ? req.student._id : null,
+        teacher: req.teacher ? req.teacher._id : null,
+      },
+    });
+    await diary.save();
+    res.status(200).send(diary);
+  } catch (e) {
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+};
 
-export {  alldiaries ,adddiary};
+const fetchDiary = async (req, res) => {
+  try {
+    const diaries = await Diary.find({ _id: req.body.studentId });
+    res.status(200).send(diaries);
+  } catch (e) {
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+};
+
+export { addDiary, fetchDiary };
