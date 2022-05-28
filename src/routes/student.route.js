@@ -1,6 +1,6 @@
 import express from "express";
 import { studentAuth } from "../middleware";
-import { createStudent, loginStudent, fetchClass, addFeedback, fetchFeedback, allNotices, addDiary, fetchDiary } from "../controllers";  
+import { createStudent, loginStudent, fetchClass, addFeedback, fetchFeedback, allNotices, addDiary, fetchDiary, addAchievement } from "../controllers";  
 
 const StudentRouter = express.Router();
 
@@ -18,4 +18,5 @@ StudentRouter.get("/notice", studentAuth, allNotices);
 StudentRouter.put("/diary", studentAuth, addDiary);
 StudentRouter.get("/diary", studentAuth, fetchDiary);
 
+StudentRouter.post("/achievement", studentAuth, addAchievement);
 export { StudentRouter };
