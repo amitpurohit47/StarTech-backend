@@ -1,7 +1,4 @@
-import mongoose from "mongoose";
-import validator from "validator";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import mongoose from "mongoose"; 
 
 const DiarySchema = new mongoose.Schema(
   {
@@ -15,14 +12,18 @@ const DiarySchema = new mongoose.Schema(
         message: {
           type: String,
         },
-        authorId: {
-          type: mongoose.Schema.Types.ObjectId,
-          // What should be the value of ref ???
+        author: {
+          student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Student',
+          },
+          teacher: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Teacher',
+          } 
         }
       }
-    ]
-
-
+    ] 
   },
   {
     timestamps: true,

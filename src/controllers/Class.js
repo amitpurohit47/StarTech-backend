@@ -18,7 +18,8 @@ const fetchClass = async (req, res) => {
       .populate("teachers")
       .populate("students")
       .populate("studyMaterialId")
-      .populate("markArr");
+      .populate("markArr")
+      .populate("events");
     res.status(200).send(_class);
   } catch (e) {
     res.status(500).send({ error: "Internal Server Error" });

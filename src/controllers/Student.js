@@ -1,13 +1,14 @@
-import jwt from "jsonwebtoken";
-import { Student } from "../models/index.js";
+import { Student, Diary } from "../models/index.js";
 
 const createStudent = async (req, res) => {
-  const student = new Student(req.body);
-  console.log("sch");
+  const student = new Student(req.body); 
   try {
     await student.save();
-    const token = await student.generateAuthToken();
-    console.log("in try student", student);
+    const token = await student.generateAuthToken(); 
+
+    const diary = new Diary({studentId: req.student._id});
+    await diary.save();
+    
     res.status(201).send({ student, token });
   } catch (e) {
     console.log(e);
