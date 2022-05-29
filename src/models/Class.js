@@ -29,11 +29,10 @@ const ClassSchema = new mongoose.Schema(
         teacherId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Teacher",
-        },
-        isClassTeacher: {
-          type: Boolean,
-          default: false,
-        },
+        }, 
+        subject: {
+          type: String,
+        }
       },
     ],
     students: [
