@@ -1,8 +1,13 @@
 import { Mark } from "../models/index.js";
+import { Class } from "../models/index.js";
 const addMark=async(req,res) => {
-    const mark = new Mark(req.body);
+    const mark = new Mark(req.body.marks);
+    const classid=req.body.classid;
       try {
         await mark.save();
+        const _class = await Class.find({_id:classid});
+        _class.markArr.push(mark._id);
+        _class.save();
         res.status(201).send(mark);
       } catch (e) {
         res.status(500).send({ error: "Internal Server Error" });
