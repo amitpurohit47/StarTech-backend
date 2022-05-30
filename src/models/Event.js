@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
-import validator from "validator";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import validator from "validator"; 
 
 const EventSchema = new mongoose.Schema(
   {
-    date:{
+    classId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Class",
+    },
+    eventDate:{
         type:Date,
         required: true,
     },
@@ -25,9 +27,7 @@ const EventSchema = new mongoose.Schema(
               throw new Error("Enter valid url");
             }
           },
-    }
-   
- 
+    } 
   },
   {
     timestamps: true,

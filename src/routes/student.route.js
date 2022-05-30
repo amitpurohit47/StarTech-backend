@@ -1,7 +1,6 @@
 import express from "express";
 import { studentAuth } from "../middleware";
-import { createStudent, loginStudent } from "../controllers";
-import { Student } from "../models";
+import { createStudent, loginStudent, fetchClass, addFeedback, fetchFeedback, allNotices, addDiary, fetchDiary, addAchievement } from "../controllers";  
 
 const StudentRouter = express.Router();
 
@@ -9,4 +8,15 @@ const StudentRouter = express.Router();
 
 StudentRouter.get("/login", studentAuth, loginStudent);
 
+StudentRouter.get("/class", studentAuth, fetchClass);
+
+StudentRouter.post("/feedback", studentAuth, addFeedback);
+StudentRouter.get("/feedback", studentAuth, fetchFeedback);
+
+StudentRouter.get("/notice", studentAuth, allNotices);
+
+StudentRouter.put("/diary", studentAuth, addDiary);
+StudentRouter.get("/diary", studentAuth, fetchDiary);
+
+StudentRouter.post("/achievement", studentAuth, addAchievement);
 export { StudentRouter };

@@ -32,6 +32,14 @@ const StudentSchema = new mongoose.Schema(
         }
       },
     },
+    schoolId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "School",
+    },
+    class: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Class",
+    },
     achievements: [
       {
         title: {
@@ -42,6 +50,19 @@ const StudentSchema = new mongoose.Schema(
         },
         dateOfAchievement: {
           type: Date,
+        },
+        document: {
+          type: String, 
+          validate(value) {
+            if (
+              !validator.isURL(value, {
+                protocols: ["http", "https"],
+                require_protocol: true,
+              })
+            ) {
+              throw new Error("Enter valid url");
+            }
+          },
         },
       },
     ],

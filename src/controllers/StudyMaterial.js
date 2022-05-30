@@ -1,10 +1,14 @@
 import { StudyMaterial } from "../models/index.js";
 
 const addStudyMaterial = async (req, res) => {
-  const studyMaterial = new StudyMaterial(req.body);
+  const studyMaterialId=req.body.StudyMaterialId;
+  
+
   try {
-    await studyMaterial.save();
-    res.status(201).send(studyMaterial);
+    const studyMaterial=await StudyMaterial.findOne({_id: studyMaterialId});
+    studyMaterial.docArray.push(req.body.studyMaterial);
+    studyMaterial.save();
+    res.status(201).send("Study Material Added Successfully")
   } catch (e) {
     res.status(500).send({ error: "Internal Server Error" });
   }
