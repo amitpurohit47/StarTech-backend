@@ -5,6 +5,10 @@ import jwt from "jsonwebtoken";
 
 const StudentSchema = new mongoose.Schema(
   {
+    rollNo: {
+      type: Number,
+      required: true,
+    },
     name: {
       type: String,
       trim: true,
@@ -40,6 +44,34 @@ const StudentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Class",
     },
+    //the value should be pushed at the time of adding teacher to class
+    attendance: [
+      {
+        teacherId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Attendance",
+        },
+        subName: {
+          type: String, 
+        },
+        //all days
+        attendence: [
+          {
+            date: {
+              type: Date,
+            },
+          },
+        ],
+        //present days
+        attendence: [
+          {
+            date: {
+              type: Date,
+            },
+          },
+        ],  
+      },
+    ],
     achievements: [
       {
         title: {
@@ -52,7 +84,7 @@ const StudentSchema = new mongoose.Schema(
           type: Date,
         },
         document: {
-          type: String, 
+          type: String,
           validate(value) {
             if (
               !validator.isURL(value, {
