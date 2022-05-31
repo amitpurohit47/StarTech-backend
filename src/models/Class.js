@@ -8,21 +8,10 @@ const ClassSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    classTeacherName: {
-      type: String,
-      trim: true,
+    classTeacherId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Teacher",
       required: true,
-    },
-    classTeacherEmail: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error("Enter valid email");
-        }
-      },
     },
     teachers: [
       {
