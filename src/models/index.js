@@ -10,4 +10,5 @@ export * from './Notice.js';
 export * from './Notification.js';
 export * from './StudyMaterial.js';
 export * from './Class.js'; 
+export * from './Query.js';
 
