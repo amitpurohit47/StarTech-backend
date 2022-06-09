@@ -10,7 +10,7 @@ const NoticeSchema = new mongoose.Schema(
     //only if created by teacher
     createdByTeacher: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "teacher",
+      ref: "Teacher",
     },
     title: {
       type: String,

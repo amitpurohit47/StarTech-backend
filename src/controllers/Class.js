@@ -25,7 +25,6 @@ const fetchallClasses = async (req, res) => {
 };
 
 const fetchClass = async (req, res) => {
-  console.log("Hello");
   try {
     const _class = await Class.findOne({
       _id: req.body.id,

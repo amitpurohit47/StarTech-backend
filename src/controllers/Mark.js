@@ -5,7 +5,7 @@ const addMark=async(req,res) => {
     const classid=req.body.classid;
       try {
         await mark.save();
-        const _class = await Class.find({_id:classid});
+        const _class = await Class.findById({_id:classid});
         _class.markArr.push(mark._id);
         _class.save();
         res.status(201).send(mark);

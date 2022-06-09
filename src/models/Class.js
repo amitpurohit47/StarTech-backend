@@ -18,7 +18,7 @@ const ClassSchema = new mongoose.Schema(
         teacherId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Teacher",
-        }, 
+        },
         subject: {
           type: String,
         }
@@ -45,10 +45,12 @@ const ClassSchema = new mongoose.Schema(
         }
       },
     },
-    studyMaterialId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "StudyMaterial",
-    },
+    studyMaterialId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "StudyMaterial",
+      }
+    ],
     markArr: [
       {
         type: mongoose.Schema.Types.ObjectId,
