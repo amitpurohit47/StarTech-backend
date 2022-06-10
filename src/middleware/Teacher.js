@@ -9,7 +9,6 @@ const teacherAuth = async (req, res, next) => {
       _id: decodedToken._id,
       "tokens.token": token,
     });
-
     if (!teacher) {
       throw new Error();
     }

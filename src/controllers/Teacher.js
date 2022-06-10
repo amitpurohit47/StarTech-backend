@@ -3,35 +3,62 @@ import generator from 'generate-password';
 import { Teacher } from "../models/index.js";
 import { Class } from "../models/index.js";
 import { StudyMaterial } from "../models/index.js";
-
+import mongoose from "mongoose";
+// const mongoose = require('mongoose');
 const addSubjectTeachers = async (req, res) => {
-  const subjectTeachers=req.body.subjectTeachers;
-  const subjectTitles=[];
-  subjectTeachers.map((e,i)=>{
-    const temp=new StudyMaterial({subjectTitle:e.subjectTitle})
+  const subjectTeachers = req.body.subjectTeachers;
+  console.log(subjectTeachers)
+  const subjectTitles = [];
+  subjectTeachers.map((e, i) => {
+    console.log(e.subject)
+    const temp = new StudyMaterial({ subjectTitle: e.subject })
     subjectTitles.push(temp);
   })
-  const classid=req.body.classid;
-  try{
-    const _class = await Class.find({_id:classid});
-  _class.teachers.push(subjectTeachers);
-  await _class.save();
-    subjectTitles.map(async(e,i)=>{
-      _class.studyMaterialId.push(e._id);
-      await e.save();
-    })
-  res.status(201).send({message:"Subject Teachers Added Successfully"});
+  const classid = req.body.classid;
+  try {
+    const _class = await Class.findById(classid ).then(async(__class) => {
+      // console.log(_class)
+      // console.log(_class.teachers)
+      // console.log(subjectTeachers)
+      for(var i=0; i<subjectTeachers.length; i++)
+      {
+        __class.teachers.push(subjectTeachers[i])
+      }
+
+      subjectTitles.map(async (e, i) => {
+        __class.studyMaterialId.push(e._id);
+        await e.save();
+      })
+      console.log(__class)
+      await __class.save();
+      // console.log(classid);
+      // console.log(subjectTitles)
+      res.status(201).send({ message: "Subject Teachers Added Successfully" });
+    });
+    // _class.teachers.push(subjectTeachers);
+
+    //   subjectTitles.map(async(e,i)=>{
+    //     _class.studyMaterialId.push(e._id);
+    //     await e.save();
+    //   })
+    //   await _class.save();
+    // console.log(classid);
+    // console.log(subjectTitles)
+    // res.status(201).send({ message: "Subject Teachers Added Successfully" });
   }
-  catch(err) {
-    res.status(500).send({message:"Error While Adding Subject Teachers"});
+  catch (err) {
+    console.log(err)
+    res.status(500).send({ message: "Error While Adding Subject Teachers" });
   }
-  
+
 }
 const createTeacher = async (req, res) => {
-  
+
   console.log("Create Teacher");
   const teacher = new Teacher(req.body);
-  
+
+  console.log(req.school);
+
   try {
     await teacher.save();
     const token = await teacher.generateAuthToken();

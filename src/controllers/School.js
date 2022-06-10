@@ -2,12 +2,10 @@ import jwt from "jsonwebtoken";
 import { School } from "../models/index.js";
 
 const createSchool = async (req, res) => {
-  const school = new School(req.body);
-  console.log("sch");
+  const school = new School(req.body); 
   try {
     await school.save();
-    const token = await school.generateAuthToken();
-    console.log("in try school", school);
+    const token = await school.generateAuthToken(); 
     res.status(201).send({ school, token });
   } catch (e) {
     console.log(e);

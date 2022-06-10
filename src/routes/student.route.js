@@ -6,7 +6,7 @@ const StudentRouter = express.Router();
 
 //StudentRouter.post("/signup", createStudent);
 
-StudentRouter.get("/login", studentAuth, loginStudent);
+StudentRouter.get("/login", loginStudent);
 
 StudentRouter.get("/class", studentAuth, fetchClass);
 
