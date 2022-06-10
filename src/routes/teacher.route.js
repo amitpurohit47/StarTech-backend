@@ -1,6 +1,6 @@
 import express from "express";
 import { teacherAuth } from "../middleware";
-import { createTeacher, loginTeacher, fetchClass, fetchallClasses, addSubjectTeachers, fetchStudyMaterial, addStudyMaterial, addNotice, allNotices, addMark, allMark, addAttendence } from "../controllers";
+import { createTeacher, loginTeacher, fetchClass, fetchallClasses, addSubjectTeachers, fetchStudyMaterial, addStudyMaterial, addNotice, allNotices, addMark, allMark, addAttendence, addClass } from "../controllers";
 import { Teacher } from "../models";
 
 const TeacherRouter = express.Router();
@@ -17,6 +17,7 @@ TeacherRouter.post("/addAttendence", addAttendence);
 
 TeacherRouter.get("/login", teacherAuth, loginTeacher);
 TeacherRouter.get("/class", fetchClass);
+TeacherRouter.post("/class", addClass);
 TeacherRouter.get("/allClasses", fetchallClasses);
 
 export { TeacherRouter };
