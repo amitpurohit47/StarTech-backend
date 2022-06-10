@@ -6,19 +6,19 @@ import { Teacher } from "../models";
 const TeacherRouter = express.Router();
 //Add auth controllers @mayur sarode
 TeacherRouter.post("/signup", createTeacher);
-TeacherRouter.post("/addSubjectTeachers", addSubjectTeachers);
-TeacherRouter.post("/addStudyMaterial", addStudyMaterial);
-TeacherRouter.post("/addNotice", addNotice);
-TeacherRouter.post("/allNotices", allNotices);
-TeacherRouter.post("/addMark", addMark);
+TeacherRouter.post("/addSubjectTeachers",teacherAuth, addSubjectTeachers);
+TeacherRouter.post("/addStudyMaterial",teacherAuth, addStudyMaterial);
+TeacherRouter.post("/addNotice",teacherAuth, addNotice);
+TeacherRouter.post("/allNotices",teacherAuth, allNotices);
+TeacherRouter.post("/addMark",teacherAuth, addMark);
 // Below Route Will Not Required
 // TeacherRouter.get("/allMark", allMark);
 
-TeacherRouter.post("/addAttendence", addAttendence); 
-TeacherRouter.post("/addStudents", addStudents); 
+TeacherRouter.post("/addAttendence",teacherAuth, addAttendence); 
+TeacherRouter.post("/addStudents",teacherAuth ,addStudents); 
 
-TeacherRouter.get("/login", teacherAuth, loginTeacher);
-TeacherRouter.post("/class", fetchClass);
-TeacherRouter.get("/allClasses", fetchallClasses);
+TeacherRouter.post("/login", loginTeacher);
+TeacherRouter.post("/class",teacherAuth, fetchClass);
+TeacherRouter.get("/allClasses",teacherAuth, fetchallClasses);
 
 export { TeacherRouter };

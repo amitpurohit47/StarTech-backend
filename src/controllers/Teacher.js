@@ -74,6 +74,7 @@ const createTeacher = async (req, res) => {
 };
 
 const loginTeacher = async (req, res) => {
+  console.log("logging in")
   try {
     const teacher = await Teacher.findUsingCredentials(
       req.body.email,
@@ -82,6 +83,7 @@ const loginTeacher = async (req, res) => {
     const token = await teacher.generateAuthToken();
     res.status(200).send({ teacher, token });
   } catch (e) {
+    console.log(e);
     res.status(400).send({ error: "Invalid Credentials" });
   }
 };
