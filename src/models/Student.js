@@ -39,10 +39,12 @@ const StudentSchema = new mongoose.Schema(
     schoolId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "School",
+      required: true,
     },
     class: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Class",
+      required: true,
     },
     //the value should be pushed at the time of adding teacher to class
     attendance: [

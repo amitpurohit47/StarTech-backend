@@ -4,7 +4,7 @@ import { createTeacher, loginTeacher, fetchClass, fetchallClasses, addSubjectTea
 import { Teacher } from "../models";
 
 const TeacherRouter = express.Router();
-
+//Add auth controllers @mayur sarode
 TeacherRouter.post("/signup", createTeacher);
 TeacherRouter.post("/addSubjectTeachers", addSubjectTeachers);
 TeacherRouter.post("/addStudyMaterial", addStudyMaterial);
