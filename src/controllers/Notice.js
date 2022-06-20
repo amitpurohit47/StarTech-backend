@@ -3,7 +3,7 @@ import { Notice } from "../models/index.js";
 const addNotice = async (req, res) => {
   const notice = new Notice({
     ...req.body.notice,
-    createdByTeacher: req.body.teacher ? req.body.teacher._id : null,
+    createdByTeacher: req.teacher ? req.teacher._id : null,
   });
   try {
     await notice.save();

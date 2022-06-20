@@ -20,7 +20,7 @@ const addStudentsHelper=async(req,res)=>{
     
     return {status:201,message:{student:req,token}};
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     if (e.keyPattern?.email === 1) {
       return {status: 400,message: "Email already exists"}
     }
@@ -34,6 +34,10 @@ const addStudents = async (req, res) => {
   // return;
   const temp = req.body.students;
   var promises = temp.map(async (e, i) => {
+    e.schoolId=req.teacher.schoolId;
+    e.class=req.teacher.classTeacherOf;
+    // console.log(req.teacher)
+    console.log("fesdfd")
     return addStudentsHelper(e, res);
   })
 

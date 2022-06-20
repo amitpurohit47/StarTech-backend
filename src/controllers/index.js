@@ -10,3 +10,4 @@ export * from "./Feedback.js";
 export * from "./StudyMaterial.js";
 export * from "./Mark.js";
 export * from "./Query.js";
+export * from "./Event.js";
