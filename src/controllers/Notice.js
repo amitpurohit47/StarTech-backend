@@ -1,10 +1,19 @@
 import { Notice } from "../models/index.js";
 
 const addNotice = async (req, res) => {
-  const notice = new Notice({
-    ...req.body.notice,
-    createdByTeacher: req.teacher ? req.teacher._id : null,
-  });
+  let notice;
+  if(req.teacher){
+    notice = new Notice({
+      ...req.body,
+      schoolId: req.teacher.schoolId,
+      createdByTeacher: req.teacher._id,
+    });
+  }else{
+    notice = new Notice({
+      ...req.body,
+      schoolId: req.school._id,
+    });
+  }  
   try {
     await notice.save();
     res.status(201).send(notice);
@@ -14,9 +23,10 @@ const addNotice = async (req, res) => {
 };
 
 const allNotices = async (req, res) => {
+  
   try {
     const notices = await Notice.find({
-      schoolId: req.body._id,
+      schoolId: req.school._id,
     })
       .populate("createdByTeacher")
       .populate("schoolId")

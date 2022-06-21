@@ -39,18 +39,14 @@ const SchoolSchema = new mongoose.Schema(
     },
     teachers: [
       {
-        teacherId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Teacher",
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Teacher",
       },
     ],
     classes: [
       {
-        classId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Class",
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Class",
       },
     ],
     tokens: [
@@ -79,7 +75,10 @@ SchoolSchema.methods.toJSON = function () {
 
 SchoolSchema.statics.findUsingCredentials = async (email, password) => {
   const lowercaseEmail = email.toLowerCase();
-  const school = await School.findOne({ email: lowercaseEmail });
+  const school = await School.findOne({ email: lowercaseEmail })
+    .populate("teachers")
+    .populate("classes");
+
   if (!school) {
     throw new Error("school not found");
   }
@@ -88,6 +87,7 @@ SchoolSchema.statics.findUsingCredentials = async (email, password) => {
   if (!isFound) {
     throw new Error("You have entered wrong password");
   }
+
   return school;
 };
 

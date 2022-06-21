@@ -2,25 +2,23 @@ import { Student, Diary } from "../models/index.js";
 import {generatePassword} from '../util/generatepassword.js'
 
 const addStudentsHelper=async(req,res)=>{
-  var password = generatePassword();
-  console.log(password);
+  var password = generatePassword(); 
   req.password=password;
 
   const student = new Student(req);
 
   try {
-    await student.save();
-    const token = await student.generateAuthToken();
-    // student.password=password;
-    // var temp=student;
-    // temp['testing']=password;
-    // console.log("in try student", temp);
-    // Object.assign(student, {mayur:password});
-
+    await student.save(); 
     
-    return {status:201,message:{student:req,token}};
+    const _class = await Class.findOne({ _id: req.class });
+    _class.students.push(student._id);
+    await _class.save(); 
+
+    const diary = new Diary({ studentId: req.student._id });
+    await diary.save();
+
+    return {status:201,message:{student:req}};
   } catch (e) {
-    // console.log(e);
     if (e.keyPattern?.email === 1) {
       return {status: 400,message: "Email already exists"}
     }
@@ -30,14 +28,12 @@ const addStudentsHelper=async(req,res)=>{
 
 
 const addStudents = async (req, res) => {
-  console.log(req.body);
-  // return;
+   
   const temp = req.body.students;
   var promises = temp.map(async (e, i) => {
     e.schoolId=req.teacher.schoolId;
     e.class=req.teacher.classTeacherOf;
-    // console.log(req.teacher)
-    console.log("fesdfd")
+    
     return addStudentsHelper(e, res);
   })
 
@@ -49,9 +45,7 @@ const addStudents = async (req, res) => {
         res.status(e.status).send({ error: e.message });
         return;
       }
-      else {
-        console.log("hello")
-        // console.log(e.message.student);
+      else { 
         response.push(e.message.student)
       }
     }
@@ -60,26 +54,26 @@ const addStudents = async (req, res) => {
   })
 }
 
-const createStudent = async (req, res) => {
-  const student = new Student(req.body);
-  try {
-    await student.save();
-    const token = await student.generateAuthToken();
-
-    const diary = new Diary({ studentId: req.student._id });
-    await diary.save();
-
-    res.status(201).send({ student, token });
-  } catch (e) {
-    console.log(e);
-    if (e.keyPattern?.email === 1) {
-      res.status(400).send({
-        error: "Email Already Exists",
-      });
-    }
-    res.status(500).send({ error: "Internal Server Error" });
-  }
-};
+//const createStudent = async (req, res) => {
+//  const student = new Student(req.body);
+//  try {
+//    await student.save();
+//    const token = await student.generateAuthToken();
+//
+//    const diary = new Diary({ studentId: req.student._id });
+//    await diary.save();
+//
+//    res.status(201).send({ student, token });
+//  } catch (e) {
+//    console.log(e);
+//    if (e.keyPattern?.email === 1) {
+//      res.status(400).send({
+//        error: "Email Already Exists",
+//      });
+//    }
+//    res.status(500).send({ error: "Internal Server Error" });
+//  }
+//};
 
 const loginStudent = async (req, res) => {
   try {
@@ -110,4 +104,4 @@ const addAchievement = async (req, res) => {
   }
 };
 
-export { createStudent, loginStudent, addAchievement, addStudents };
+export { loginStudent, addAchievement, addStudents };

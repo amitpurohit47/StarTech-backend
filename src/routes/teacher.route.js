@@ -1,7 +1,6 @@
 import express from "express";
 import { teacherAuth } from "../middleware";
-import {
-  createTeacher,
+import { 
   loginTeacher,
   fetchClass,
   fetchallClasses,

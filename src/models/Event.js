@@ -6,6 +6,7 @@ const EventSchema = new mongoose.Schema(
     classId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Class",
+      required: true,
     },
     eventDate:{
         type:Date,
@@ -21,7 +22,6 @@ const EventSchema = new mongoose.Schema(
     },
     link:{
         type:String,
-        required: false,
         validate(value) {
             if (!validator.isURL(value, { protocols: ['http', 'https'], require_protocol: true })) {
               throw new Error("Enter valid url");

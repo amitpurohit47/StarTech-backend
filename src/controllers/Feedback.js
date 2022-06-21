@@ -1,18 +1,21 @@
 import { Feedback } from "../models/index.js";
 
 const addFeedback = async (req, res) => {
+  //school gives feedback to us
+  //teacher -> school or us
+  //student -> teacher or school or us
   const obj = {
     from: {
-      from: req.body.from.from,
-      student: req.student._id ? req.student._id : null,
-      teacher: req.teacher._id ? req.teacher._id : null,
-      school: req.school._id ? req.school._id : null,
+      from: req.body.from,
+      student: req.body.from == "student" ? req.student._id : null,
+      teacher: req.body.from == "teacher" ? req.teacher._id : null,
+      school: req.body.from == "school" ? req.school._id : null,
     },
     to: {
-      to: req.body.to.to,
-      us: req.body.to.to == "us" ? true : false,
-      teacher: req.body.to.to == "teacher" ? req.body.teacher._id : null,
-      school: req.body.to.to == "school" ? req.body.school._id : null,
+      to: req.body.to,
+      us: req.body.to == "us" ? true : false,
+      teacher: req.body.to == "teacher" ? req.body.teacherId : null,
+      school: req.body.to == "school" ? req.body.schoolId : null,
     },
     issue: req.body.issue,
   };
@@ -25,9 +28,9 @@ const addFeedback = async (req, res) => {
   }
 };
 
-const replyFeedback = async (req, res) => {
+const replyFeedback = async (req, res) => { 
   try {
-    const feedback = new Feedback.findOne({ _id: req.body._id });
+    const feedback = await Feedback.findOne({ _id: req.body.feedbackId }); 
     feedback.reply = req.body.reply;
     await feedback.save();
     res.status(201).send(feedback);
@@ -39,44 +42,35 @@ const replyFeedback = async (req, res) => {
 const fetchFeedback = async (req, res) => {
   try {
     const feedbacks = [];
-    if (req.student._id) {
+    if (req.student) {
       const temp = await Feedback.find({
-        from: {
-          student: req.student._id,
-        },
+        'from.student': req.student._id, 
       });
 
       feedbacks.push(temp);
     }
 
-    if (req.teacher._id) {
+    if (req.teacher) {
       const temp = await Feedback.find({
-        from: {
-          teacher: req.teacher._id,
-        },
+        'from.teacher': req.teacher._id,
       });
       feedbacks.push(temp);
 
       const temp2 = await Feedback.find({
-        to: {
-          teacher: req.teacher._id,
-        },
+        'to.teacher': req.teacher._id,
       });
       feedbacks.push(temp2);
     }
 
-    if (req.school._id) {
+    if (req.school) {
       const temp = await Feedback.find({
-        from: {
-          school: req.school._id,
-        },
+        'from.school': req.school._id,
       });
+      console.log(temp);
       feedbacks.push(temp);
 
       const temp2 = await Feedback.find({
-        to: {
-          school: req.school._id,
-        },
+        'to.school': req.school._id, 
       });
       feedbacks.push(temp2);
     }

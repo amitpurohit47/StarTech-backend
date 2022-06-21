@@ -24,7 +24,8 @@ const loginSchool = async (req, res) => {
       req.body.email,
       req.body.password
     );
-    const token = await school.generateAuthToken();
+    console.log(school);
+    const token = await school.generateAuthToken(); 
     res.status(200).send({ school, token });
   } catch (e) {
     res.status(400).send({ error: "Invalid Credentials" });

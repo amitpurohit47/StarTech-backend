@@ -44,6 +44,7 @@ const FeedbackSchema = new mongoose.Schema(
     },
     reply: {
       type: String,
+      default: "",
     }
   },
   {

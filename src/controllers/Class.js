@@ -2,16 +2,21 @@ import { Class, School, Teacher } from "../models/index.js";
 
 const addClass = async (req, res) => {
   try {
-    const classTeacher = await Teacher.findOne({ name: req.body.classTeacher });
+    const classTeacher = await Teacher.findOne({ _id: req.body.classTeacherId });
+    if(!classTeacher){
+      res.status(404).send({error: "class teacher not found"});
+    }
     const body = {
       className: req.body.className,
       classTeacherId: classTeacher._id,
     };
     const _class = new Class(body);
     await _class.save();
+
     const school = await School.findById(req.school._id);
     school.classes.push(_class);
     await school.save();
+
     res.status(201).send(_class);
   } catch (e) {
     console.log(e);

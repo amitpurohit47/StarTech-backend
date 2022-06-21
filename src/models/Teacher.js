@@ -101,8 +101,7 @@ TeacherSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
-TeacherSchema.pre("save", async function (next) {
-  console.log("Hello");
+TeacherSchema.pre("save", async function (next) { 
   const teacher = this; //user which is being saved
   if (teacher.isModified("password")) {
     teacher.password = await bcrypt.hash(teacher.password, 8);

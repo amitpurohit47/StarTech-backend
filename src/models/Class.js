@@ -21,15 +21,13 @@ const ClassSchema = new mongoose.Schema(
         },
         subject: {
           type: String,
-        }
+        },
       },
     ],
     students: [
       {
-        studentId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Student",
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Student",
       },
     ],
     timeTable: {
@@ -49,7 +47,7 @@ const ClassSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "StudyMaterial",
-      }
+      },
     ],
     markArr: [
       {
