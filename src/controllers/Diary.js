@@ -1,10 +1,10 @@
 import { Diary } from "../models/index.js";
 
 const addDiary = async (req, res) => {
-    //diary already created at time of student sign up.
+    //diary already created at time of addstudents.
   try {
     const diary = Diary.findOne({
-      _id: req.body.id,
+      _id: req.body.diaryId,
     });
     diary.diaryArray.push({
       message: req.body.message,
@@ -22,7 +22,7 @@ const addDiary = async (req, res) => {
 
 const fetchDiary = async (req, res) => {
   try {
-    const diaries = await Diary.find({ _id: req.body.studentId });
+    const diaries = await Diary.find({ _id: req.student._id });
     res.status(200).send(diaries);
   } catch (e) {
     res.status(500).send({ error: "Internal Server Error" });

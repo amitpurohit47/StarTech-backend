@@ -5,13 +5,19 @@ const addClass = async (req, res) => {
     const classTeacher = await Teacher.findOne({ _id: req.body.classTeacherId });
     if(!classTeacher){
       res.status(404).send({error: "class teacher not found"});
+    }else if(classTeacher.classTeacherOf){
+      res.status(404).send({error: "teacher is already a class teacher"});
     }
+
     const body = {
       className: req.body.className,
       classTeacherId: classTeacher._id,
     };
     const _class = new Class(body);
     await _class.save();
+
+    classTeacher.classTeacherOf = _class._id;
+    await classTeacher.save();
 
     const school = await School.findById(req.school._id);
     school.classes.push(_class);
@@ -41,8 +47,9 @@ const fetchallClasses = async (req, res) => {
 const fetchClass = async (req, res) => {
   try {
     const _class = await Class.findOne({
-      _id: req.body.id,
+      _id: req.body.classId,
     })
+      .populate("classTeacherId")
       .populate("teachers")
       .populate("students")
       .populate("studyMaterialId")

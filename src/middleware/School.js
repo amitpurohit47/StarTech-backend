@@ -3,7 +3,7 @@ import { School } from "../models/index.js";
 
 const schoolAuth = async (req, res, next) => {
   try {
-    console.log(req.header);
+    
     const token = req.header("Authorization").replace("Bearer ", "");
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     const school = await School.findOne({

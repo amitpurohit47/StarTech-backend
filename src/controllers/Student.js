@@ -1,4 +1,4 @@
-import { Student, Diary } from "../models/index.js";
+import { Student, Diary, Class } from "../models/index.js";
 import {generatePassword} from '../util/generatepassword.js'
 
 const addStudentsHelper=async(req,res)=>{
@@ -6,16 +6,13 @@ const addStudentsHelper=async(req,res)=>{
   req.password=password;
 
   const student = new Student(req);
-
+  
   try {
     await student.save(); 
-    
     const _class = await Class.findOne({ _id: req.class });
+    
     _class.students.push(student._id);
     await _class.save(); 
-
-    const diary = new Diary({ studentId: req.student._id });
-    await diary.save();
 
     return {status:201,message:{student:req}};
   } catch (e) {
@@ -28,7 +25,7 @@ const addStudentsHelper=async(req,res)=>{
 
 
 const addStudents = async (req, res) => {
-   
+  
   const temp = req.body.students;
   var promises = temp.map(async (e, i) => {
     e.schoolId=req.teacher.schoolId;

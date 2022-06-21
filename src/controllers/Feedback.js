@@ -4,6 +4,7 @@ const addFeedback = async (req, res) => {
   //school gives feedback to us
   //teacher -> school or us
   //student -> teacher or school or us
+  console.log(req.student._id);
   const obj = {
     from: {
       from: req.body.from,

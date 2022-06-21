@@ -47,6 +47,22 @@ const StudentSchema = new mongoose.Schema(
       required: true,
     },
     //the value should be pushed at the time of adding teacher to class
+    Diaries: [
+      {
+        diary: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Diary",
+        },
+        teacher: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Teacher",
+        },
+        subject: {
+          type: String,
+        },
+      },
+    ],
+    //the value should be pushed at the time of adding teacher to class
     attendance: [
       {
         teacherId: {
@@ -54,24 +70,20 @@ const StudentSchema = new mongoose.Schema(
           ref: "Attendance",
         },
         subName: {
-          type: String, 
+          type: String,
         },
         //all days
-        attendence: [
+        attendenceAll: [
           {
-            date: {
-              type: Date,
-            },
+            type: Date,
           },
         ],
         //present days
-        attendence: [
+        attendencePresent: [
           {
-            date: {
-              type: Date,
-            },
+            type: Date,
           },
-        ],  
+        ],
       },
     ],
     achievements: [

@@ -6,7 +6,7 @@ import { School } from "../models";
 const SchoolRouter = express.Router();
 //Add auth controllers @amit purohit
 SchoolRouter.post("/signup", createSchool);
-SchoolRouter.get("/login", loginSchool);
+SchoolRouter.post("/login", loginSchool);
 SchoolRouter.post("/addteachers", schoolAuth, addTeachers);
 SchoolRouter.post("/addclass", schoolAuth, addClass);
 

@@ -6,7 +6,7 @@ const StudentRouter = express.Router();
 
 //StudentRouter.post("/signup", createStudent);
 
-StudentRouter.get("/login", loginStudent);
+StudentRouter.post("/login", loginStudent);
 
 StudentRouter.get("/class", studentAuth, fetchClass);
 
@@ -15,7 +15,8 @@ StudentRouter.get("/feedback", studentAuth, fetchFeedback);
 
 StudentRouter.get("/notice", studentAuth, allNotices);
 
-StudentRouter.put("/diary", studentAuth, addDiary);
+//diary should be created at the time of adding subj teacher.
+StudentRouter.put("/addmessageindiary", studentAuth, addDiary);
 StudentRouter.get("/diary", studentAuth, fetchDiary);
 
 StudentRouter.post("/achievement", studentAuth, addAchievement);

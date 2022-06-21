@@ -2,18 +2,18 @@ import { Notice } from "../models/index.js";
 
 const addNotice = async (req, res) => {
   let notice;
-  if(req.teacher){
+  if (req.teacher) {
     notice = new Notice({
       ...req.body,
       schoolId: req.teacher.schoolId,
       createdByTeacher: req.teacher._id,
     });
-  }else{
+  } else {
     notice = new Notice({
       ...req.body,
       schoolId: req.school._id,
     });
-  }  
+  }
   try {
     await notice.save();
     res.status(201).send(notice);
@@ -23,10 +23,14 @@ const addNotice = async (req, res) => {
 };
 
 const allNotices = async (req, res) => {
-  
   try {
+    const schoolId = req.student
+      ? req.student.schoolId
+      : req.teacher
+      ? req.teacher.schoolId
+      : req.school._id;
     const notices = await Notice.find({
-      schoolId: req.school._id,
+      schoolId: schoolId,
     })
       .populate("createdByTeacher")
       .populate("schoolId")
@@ -35,7 +39,7 @@ const allNotices = async (req, res) => {
       });
     res.status(200).send(notices);
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res.status(500).send({ error: "Internal Server Error" });
   }
 };
