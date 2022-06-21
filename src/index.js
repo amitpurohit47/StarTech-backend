@@ -10,8 +10,6 @@ import {SchoolRouter} from './routes';
 import {StudentRouter} from './routes';
 import {TeacherRouter} from './routes'; 
 
-
-
 //connect to DB
 connectDB();
 
